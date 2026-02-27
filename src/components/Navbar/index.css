@@ -12,24 +12,33 @@
   font-size: 20px;
 }
 
+.nav-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .order-label {
   display: none;
 }
 
-.cart-container {
+.nav-cart-container {
   height: fit-content;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.cart-icon-container {
+.nav-cart-icon-container {
+  background-color: transparent;
+  border: none;
   padding: 8px;
   position: relative;
   height: fit-content;
+  cursor: pointer;
+  outline: none;
 }
 
-.cart-count {
+.nav-cart-count {
   background-color: coral;
   color: white;
   height: 20px;
@@ -44,6 +53,24 @@
   right: 0;
 }
 
+.logout-button {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: grey;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.logout-button:hover {
+  background-color: red;
+}
+
 @media screen and (min-width: 768px) {
   .cafe-navbar {
     height: 52px;
@@ -51,6 +78,14 @@
   }
   .cafe-name {
     font-size: 22px;
+  }
+
+  .nav-cart-container {
+    gap: 15px;
+  }
+
+  .logout-button {
+    padding: 6px 28px;
   }
 
   .order-label {

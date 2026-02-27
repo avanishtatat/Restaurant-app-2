@@ -1,37 +1,3 @@
-.menu-category-list {
-  margin-top: 0;
-  list-style-type: none;
-  padding-left: 8px;
-  height: 48px;
-  box-shadow: 0px 4px 16px 0px #ececec;
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  text-wrap: nowrap;
-}
-
-.category {
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 40px;
-  padding-right: 40px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Roboto;
-  border: none;
-  background-color: transparent;
-}
-
-.active-category {
-  color: rgb(167, 18, 18);
-  border-bottom: 2px solid rgb(167, 18, 18);
-}
-
 .dishes-list {
   list-style-type: none;
   padding-left: 0%;
@@ -124,15 +90,15 @@
   margin-bottom: 0%;
 }
 
-.dish-counter {
+.dish-counter-cont {
   border-radius: 1rem; /* rounded-2xl */
   background-color: #16a34a; /* green-600 */
   color: white;
-  width: fit-content;
+  height: 35px;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 4px;
+  padding: 0 10px;
 }
 
 .add-to-cart-btn-container {
@@ -165,7 +131,7 @@
   transform: translateY(4px);
 }
 
-.counter-btn {
+.counter-button {
   background: transparent;
   cursor: pointer;
   /* padding: 0.5rem 1rem; px-4 py-2 */

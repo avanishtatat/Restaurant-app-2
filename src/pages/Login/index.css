@@ -1,0 +1,92 @@
+.login-page {
+  min-height: 100vh;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 80%;
+  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+.cafe-name {
+  font-size: 22px;
+  color: rgb(51, 48, 48);
+  font-family: 'Roboto';
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid grey;
+  margin-bottom: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .login-card {
+    width: 40%;
+    padding: 28px;
+  }
+
+  .input-container {
+    margin-bottom: 28px;
+  }
+}
+
+.label {
+  color: rgb(107, 104, 104);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto';
+}
+
+.input {
+  width: 100%;
+  padding: 5px 0;
+  color: black;
+  font-size: 16px;
+  font-family: 'Roboto';
+  border: none;
+  outline: none;
+}
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-button {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 28px;
+  border-radius: 15px;
+  background-color: grey;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.sign-in-button:hover {
+  background-color: green;
+}
+
+.error-message {
+  text-align: center;
+  color: red;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto';
+}
