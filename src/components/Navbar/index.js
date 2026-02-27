@@ -1,19 +1,25 @@
-import Loader from 'react-loader-spinner'
 import {Link, withRouter} from 'react-router-dom'
-import {useContext} from 'react'
+
 import Cookies from 'js-cookie'
-import {RestaurantContext} from '../../context/RestaurantContext'
-import {CartContext} from '../../context/CartContext'
 import {IoCartOutline} from 'react-icons/io5'
+import CartContext from '../../context/CartContext'
 import './index.css'
 
-const Navbar = ({history}) => {
-  const {data} = useContext(RestaurantContext)
-  const {cartList} = useContext(CartContext)
+const Navbar = props => {
+  // const totalCartCount = cartList.reduce(
+  //   (acc, item) => acc + (item.quantity || 0),
+  //   0,
+  // )
+  const {history, restaurantName} = props
 
-  const cafeName = data?.[0]?.restaurant_name || 'UNI Resto Cafe'
-
-  const totalCartCount = cartList.length || 0
+  const renderCartItemCount = () => (
+    <CartContext.Consumer>
+      {value => {
+        const {cartList} = value
+        return <span className="nav-cart-count">{cartList.length}</span>
+      }}
+    </CartContext.Consumer>
+  )
 
   const handleLogout = () => {
     Cookies.remove('jwt_token')
@@ -23,7 +29,7 @@ const Navbar = ({history}) => {
   return (
     <nav className="cafe-navbar">
       <Link to="/" className="nav-link">
-        <h1 className="cafe-name">{cafeName}</h1>
+        <h1 className="cafe-name">{restaurantName}</h1>
       </Link>
       <div className="nav-cart-container">
         <p className="order-label">My Orders</p>
@@ -32,13 +38,12 @@ const Navbar = ({history}) => {
             className="nav-cart-icon-container"
             data-testid="cart"
             type="button"
-            role="button"
           >
             <IoCartOutline size={28} color="#000" />
-
-            <span className="nav-cart-count">{totalCartCount}</span>
+            {renderCartItemCount()}
           </button>
         </Link>
+
         <button type="button" className="logout-button" onClick={handleLogout}>
           Logout
         </button>

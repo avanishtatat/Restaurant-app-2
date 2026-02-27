@@ -66,8 +66,8 @@
   gap: 8px;
 }
 
-@media screen and (min-width: 768px){
-  .button-container{
+@media screen and (min-width: 768px) {
+  .button-container {
     width: 50%;
   }
 }

@@ -1,104 +1,114 @@
-import {useState, useContext} from 'react'
-import {CartContext} from '../../context/CartContext.js'
+import CartContext from '../../context/CartContext'
 
 import './index.css'
 
-const Dish = ({dishItem}) => {
-  const {
-    cartList,
-    addCartItem,
-    incrementCartItemQuantity,
-    decrementCartItemQuantity,
-  } = useContext(CartContext)
+const Dish = ({dishItem}) => (
+  <CartContext.Consumer>
+    {value => {
+      const {
+        cartList,
+        addCartItem,
+        incrementCartItemQuantity,
+        decrementCartItemQuantity,
+      } = value
 
-  const cartItem = cartList.find(each => each.dish_id === dishItem.dish_id)
+      const {
+        dishId,
+        dishType,
+        dishName,
+        dishAvailability,
+        dishCalories,
+        dishCurrency,
+        dishPrice,
+        dishImage,
+        dishDescription,
+        addOn,
+      } = dishItem
 
-  const quantity = cartItem ? cartItem.quantity : 0
+      const cartItem = cartList.find(each => each.dishId === dishId)
+      const quantity = cartItem ? cartItem.quantity : 0
+      return (
+        <li key={dishItem.dishId}>
+          <div className="dish-card">
+            <div className="dish-wrapper">
+              <div className="dish-left">
+                <div
+                  className={`dish-type-box ${
+                    dishType === 2 ? 'border-green' : 'border-red'
+                  }`}
+                >
+                  <span
+                    className={`dish-type-dot ${
+                      dishType === 2 ? 'bg-green' : 'bg-red'
+                    }`}
+                  />
+                </div>
 
-  return (
-    <li key={dishItem.dish_id}>
-      <div className="dish-card">
-        <div className="dish-wrapper">
-          <div className="dish-left">
-            <div
-              className={`dish-type-box ${
-                dishItem.dish_Type === 2 ? 'border-green' : 'border-red'
-              }`}
-            >
-              <span
-                className={`dish-type-dot ${
-                  dishItem.dish_Type === 2 ? 'bg-green' : 'bg-red'
-                }`}
-              ></span>
-            </div>
+                <div className="dish-content">
+                  <h1 className="dish-name">{dishName}</h1>
 
-            <div className="dish-content">
-              <h1 className="dish-name">{dishItem.dish_name}</h1>
+                  <p className="dish-price">{`${dishCurrency} ${dishPrice}`}</p>
 
-              <p className="dish-price">
-                {dishItem.dish_currency} {dishItem.dish_price}
-              </p>
+                  <p className="dish-desc">{dishDescription}</p>
 
-              <p className="dish-desc">{dishItem.dish_description}</p>
+                  {dishAvailability ? (
+                    <div className="add-to-cart-btn-container">
+                      <div className="dish-counter-cont">
+                        <button
+                          type="button"
+                          className="counter-button"
+                          onClick={() => {
+                            if (quantity > 0) {
+                              decrementCartItemQuantity(dishId)
+                            }
+                          }}
+                        >
+                          -
+                        </button>
 
-              {dishItem.dish_Availability ? (
-                <div className="add-to-cart-btn-container">
-                  <div className="dish-counter-cont">
-                    <button
-                      type="button"
-                      className="counter-button"
-                      role="button"
-                      onClick={() => {
-                        if (quantity > 0) {
-                          decrementCartItemQuantity(dishItem.dish_id)
-                        }
-                      }}
-                    >
-                      -
-                    </button>
+                        <p className="counter-value">{quantity}</p>
 
-                    <p className="counter-value">{quantity}</p>
+                        <button
+                          type="button"
+                          className="counter-button"
+                          onClick={() => {
+                            if (quantity === 0) {
+                              addCartItem({...dishItem, quantity: 1})
+                            } else {
+                              incrementCartItemQuantity(dishId)
+                            }
+                          }}
+                        >
+                          +
+                        </button>
+                      </div>
+                      {quantity > 0 ? (
+                        <button type="button" className="add-to-cart-btn">
+                          ADD TO CART
+                        </button>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <p className="dish-not-available">Not available</p>
+                  )}
 
-                    <button
-                      type="button"
-                      className="counter-button"
-                      role="button"
-                      onClick={() => {
-                        quantity === 0
-                          ? addCartItem({...dishItem, quantity: 1})
-                          : incrementCartItemQuantity(dishItem.dish_id)
-                      }}
-                    >
-                      +
-                    </button>
-                  </div>
-                  {quantity > 0 ? (
-                    <button className="add-to-cart-btn">ADD TO CART</button>
+                  {addOn && addOn.length > 0 ? (
+                    <p className="dish-custom">Customizations available</p>
                   ) : null}
                 </div>
-              ) : (
-                <p className="dish-not-available">Not available</p>
-              )}
+              </div>
 
-              {dishItem.addonCat && dishItem.addonCat.length > 0 ? (
-                <p className="dish-custom">Customizations available</p>
-              ) : null}
+              <p className="dish-calories">{`${dishCalories} calories`}</p>
+
+              <div className="dish-img-box">
+                <img src={dishImage} alt={dishName} className="dish-img" />
+              </div>
             </div>
           </div>
-
-          <p className="dish-calories">{dishItem.dish_calories} calories</p>
-
-          <div className="dish-img-box">
-            <img
-              src={dishItem.dish_image}
-              alt={dishItem.dish_name}
-              className="dish-img"
-            />
-          </div>
-        </div>
-      </div>
-    </li>
-  )
-}
+        </li>
+      )
+    }}
+  </CartContext.Consumer>
+)
 
 export default Dish
